@@ -13,6 +13,6 @@ openssl req -outform PEM -newkey rsa:2048 -nodes -keyout key.pem \
 ```
 
 ## Important links
-https://wiki.openssl.org/index.php/Simple_TLS_Server
-https://www.commandlinux.com/man-page/man3/SSL.3ssl.html
+https://wiki.openssl.org/index.php/Simple_TLS_Server  
+https://www.commandlinux.com/man-page/man3/SSL.3ssl.html  
 
