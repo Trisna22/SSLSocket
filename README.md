@@ -12,6 +12,12 @@ openssl req -outform PEM -newkey rsa:2048 -nodes -keyout key.pem \
  -x509 -days 365 -out cert.pem
 ```
 
+# A (little) bit of explainatory
+You need to use the code in the pemgenerator.cpp to create your own 
+certificate and keys, so you can use the code in server-example.cpp to 
+use this for setting up an server.
+
+
 ## Important links
 https://wiki.openssl.org/index.php/Category:Examples  
 https://wiki.openssl.org/index.php/Simple_TLS_Server  
