@@ -96,7 +96,9 @@ int main(int argc, char **argv)
         struct sockaddr_in addr;
         uint len = sizeof(addr);
         SSL *ssl;
-        const char reply[] = "test\n";
+        const char reply[] = "HTTP/1.1 200 OK\r\n"
+                        "Server: SSLServer\r\n\r\n<html><h3>"
+                        "SSLSocket test success!</h3></html>\r\n";
 
         int client = accept(sock, (struct sockaddr*)&addr, &len);
         if (client < 0) {
