@@ -1,6 +1,6 @@
 # SSLSocket
 
-A example for creating your own ssl sockets.
+An example for creating your own ssl sockets.
 
 ## Compiling
 ``` bash
