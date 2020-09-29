@@ -17,6 +17,66 @@ certificate and keys, so you can use the code in server-example.cpp to
 use this for setting up an server.
 
 
+### Creating a ssl socket server
+``` c++
+create_context();	// Creating ctx structure.
+generateKeys();		// Generating private key (optional)
+generateCert();		// Generate certificate (optional)
+
+configure_context();	// Importing key and cert file.
+
+createSockets(port);	// Simple create tcp socket.
+
+// Accept a client.
+connectionSocket = accept(sockfd, (struct sockaddr*)&remoteAddr, &len);
+
+// Set the SSL object for our encrypted messaging.
+ssl = SSL_new(ctx);
+SSL_set_fd(ssl, connectionSocket); // Specify socket.
+
+SSL_accept(ssl) // Perform handshake with client.
+
+// The rest is up to you.
+SSL_write(ssl, buffer, strlen(buffer)); // Writing to socket.
+SSL_read(ssl, buffer, strlen(buffer)); // Reading from socket.
+
+```
+
+### Creating a ssl socket client
+``` c++
+create_context();       // Creating ctx structure.
+generateKeys();         // Generating private key (optional)
+generateCert();         // Generate certificate (optional)
+
+configure_context();    // Importing key and cert file.
+
+createSockets(port);    // Simple create tcp socket.
+
+// Connect to server.
+connect(connectionSocket, (struct sockaddr*)&remoteAddr, sizeof(remoteAddr));
+
+// Set the SSL object for our encrypted messaging.
+ssl = SSL_new(ctx);
+SSL_set_fd(ssl, connectionSocket); // Specify socket.
+
+
+SSL_connect(ssl); // Perform handshake on server.
+
+// The rest is up to you.
+SSL_write(ssl, buffer, strlen(buffer)); // Writing to socket.
+SSL_read(ssl, buffer, strlen(buffer)); // Reading from socket.
+
+```
+
+### Cleanup
+``` c++
+SSL_shutdown(ssl);	// shutdowns socket.
+SSL_free(ssl);		// free SSL object.
+SSL_CTX_free(ctx);	// free CTX object.
+close(connectionSocket);// close socket.
+EVP_cleanup();		// Cleanup openssl libary.
+
+``` 
 ## Important links
 https://wiki.openssl.org/index.php/Category:Examples  
 https://wiki.openssl.org/index.php/Simple_TLS_Server  
