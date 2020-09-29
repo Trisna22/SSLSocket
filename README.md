@@ -8,8 +8,7 @@ A example for creating your own ssl sockets.
 g++ -o SSLSocket main.cpp -lssl -lcrypto
 
 # Generate private key and certificate
-openssl req -outform PEM -newkey rsa:2048 -nodes -keyout key.pem \
- -x509 -days 365 -out cert.pem
+openssl req -outform PEM -newkey rsa:2048 -nodes -keyout key.pem -x509 -days 365 -out cert.pem
 ```
 
 ## A (little) bit of explainatory
