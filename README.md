@@ -16,6 +16,40 @@ You need to use the code in the pemgenerator.cpp to create your own
 certificate and keys, so you can use the code in server-example.cpp to 
 use this for setting up an server.
 
+### Creating a context object.
+This will create an context object for your socket server or client.
+
+```  c++
+CTX* ctx = NULL;
+
+// For server socket.
+if (socketServer) {
+	const SSL_METHOD* method = SSLv23_server_method();
+	ctx = SSL_CTX_new(method);
+}
+// For client socket.
+else {
+	const SSL_METHOD* method = SSLv23_client_method();
+	ctx = SSL_CTX_new(method);
+}
+
+// Context created.
+```
+
+### Importing key and certificate file.
+Check out the code below to learn how to import a 
+certificate and private key file with the CTX object.
+
+``` c++
+SSL_CTX_set_ecdh_auto(ctx, 1);
+
+// Importing certificate file.
+SSL_CTX_use_certificate_file(ctx, "cert.pem", SSL_FILETYPE_PEM);
+
+// Importing private key file.
+SSL_CTX_use_PrivateKey_file(ctx, "key.pem", SSL_FILETYPE_PEM);
+
+```
 
 ### Creating a ssl socket server
 ``` c++
